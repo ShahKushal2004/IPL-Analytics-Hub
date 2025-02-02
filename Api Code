@@ -1,0 +1,36 @@
+--Matches List API Code in M Language
+
+let
+    Url = "https://cricbuzz-cricket.p.rapidapi.com/series/v1/4061",
+    Headers = [
+        #"x-rapidapi-key" = API_Key,
+        #"x-rapidapi-host" = "cricbuzz-cricket.p.rapidapi.com"
+    ],
+    Response = Web.Contents(Url, [Headers = Headers]),
+    JsonResponse = Json.Document(Response)
+in
+    JsonResponse
+
+-- Points Table code
+
+// Define API Key Parameter (Users can set their own key)
+let
+    API_Key = Text.From(#"API_Key"),  // Ensure it's treated as text
+
+    // API Endpoint
+    Url = "https://cricbuzz-cricket.p.rapidapi.com/stats/v1/series/4061/points-table",
+
+    // API Headers
+    Headers = [
+        #"x-rapidapi-key" = API_Key,  // Using parameter instead of hardcoding key
+        #"x-rapidapi-host" = "cricbuzz-cricket.p.rapidapi.com"
+    ],
+
+    // Fetch Data from API
+    Response = Web.Contents(Url, [Headers = Headers]),
+
+    // Convert JSON Response to Table Format
+    JsonResponse = Json.Document(Response)
+in
+    JsonResponse
+
